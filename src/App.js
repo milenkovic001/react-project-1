@@ -119,18 +119,16 @@ class App extends Component {
     this.state = {
       root: "0"
     };
-    console.log(particalkOptions.particles.number.value);
+    if (window.innerWidth < 500) particalkOptions.particles.number.value = 30;
   }
-  componentDidMount() {
-    window.addEventListener("resize", this.resize.bind(this));
-    this.resize();
-  }
+  // componentDidMount() {
+  //   window.addEventListener("resize", this.resize.bind(this));
+  //   this.resize();
+  // }
 
-  resize() {
-    console.log(window.innerWidth);
-    if (window.innerWidth < 500) particalkOptions.particles.number.value = 20;
-    console.log(particalkOptions.particles.number.value);
-  }
+  // resize() {
+  //   if (window.innerWidth < 500) particalkOptions.particles.number.value = 30;
+  // }
 
   goHome = () => {
     this.setState({ root: "0" });
