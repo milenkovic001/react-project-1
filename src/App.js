@@ -10,7 +10,7 @@ import StartingCards from "./components/startpage/startingCards";
 const particalkOptions = {
   particles: {
     number: {
-      value: 125,
+      value: 10,
       density: {
         enable: true,
         value_area: 641.3648243462092
