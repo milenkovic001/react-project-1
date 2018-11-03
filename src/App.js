@@ -10,10 +10,10 @@ import StartingCards from "./components/startpage/startingCards";
 const particalkOptions = {
   particles: {
     number: {
-      value: 200,
+      value: 125,
       density: {
         enable: true,
-        value_area: 1340
+        value_area: 641.3648243462092
       }
     },
     color: {
@@ -30,7 +30,7 @@ const particalkOptions = {
       }
     },
     opacity: {
-      value: 0.7,
+      value: 0.5,
       random: false,
       anim: {
         enable: false,
@@ -51,14 +51,14 @@ const particalkOptions = {
     },
     line_linked: {
       enable: true,
-      distance: 200,
+      distance: 150,
       color: "#666666",
       opacity: 0.4,
       width: 1
     },
     move: {
       enable: true,
-      speed: 4,
+      speed: 8.017060304327615,
       direction: "none",
       random: false,
       straight: false,
