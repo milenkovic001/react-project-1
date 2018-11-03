@@ -119,7 +119,19 @@ class App extends Component {
     this.state = {
       root: "0"
     };
+    console.log(particalkOptions.particles.number.value);
   }
+  componentDidMount() {
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 500) particalkOptions.particles.number.value = 20;
+    console.log(particalkOptions.particles.number.value);
+  }
+
   goHome = () => {
     this.setState({ root: "0" });
   };
