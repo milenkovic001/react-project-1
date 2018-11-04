@@ -31,7 +31,7 @@ class SpeedOfReading extends Component {
   }
 
   setStory = () => {
-    fetch("http://localhost:3000/newStory")
+    fetch("https://react-project-1-api.herokuapp.com/newStory")
       .then(res => res.json())
       .then(e => {
         this.setState({ text: e });

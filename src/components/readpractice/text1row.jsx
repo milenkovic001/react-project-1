@@ -19,13 +19,13 @@ class Text1row extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:3000")
+    fetch("https://react-project-1-api.herokuapp.com")
       .then(res => res.json())
       .then(e => this.changeText(e));
   }
 
   newStory = () => {
-    fetch("http://localhost:3000/newStory")
+    fetch("https://react-project-1-api.herokuapp.com/newStory")
       .then(res => res.json())
       .then(e => this.changeText(e));
   };
