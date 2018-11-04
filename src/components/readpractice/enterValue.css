@@ -1,0 +1,11 @@
+.this-btn-r {
+  float: right;
+  margin-left: 3px;
+  font-size: 10px;
+}
+
+.this-btn-l {
+  float: left;
+  margin-right: 3px;
+  font-size: 10px;
+}

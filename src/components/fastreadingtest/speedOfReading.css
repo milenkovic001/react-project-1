@@ -37,3 +37,7 @@
   float: left;
   margin-right: 5px;
 }
+
+.blure {
+  filter: blur(1.6px);
+}

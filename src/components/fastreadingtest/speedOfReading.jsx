@@ -11,7 +11,8 @@ class SpeedOfReading extends Component {
       start: false,
       startBtnValue: "start",
       timer: "",
-      text: ""
+      text: "",
+      startVisibility: "visible"
     };
     this.setTimer();
   }
@@ -37,7 +38,16 @@ class SpeedOfReading extends Component {
         this.setState({ text: e });
         document.querySelector(".text").innerHTML = e;
       })
-      .then(this.setState({ second: 0, minute: 0, start: false }));
+      .then(
+        this.setState({
+          second: 0,
+          minute: 0,
+          start: false,
+          startVisibility: "visible",
+          finishedVisibility: "visible"
+        })
+      )
+      .then((document.querySelector(".text").style.filter = "blur(1.6px)"));
   };
 
   second = () => {
@@ -49,12 +59,17 @@ class SpeedOfReading extends Component {
   };
 
   startPause = () => {
-    if (this.state.start) this.setState({ start: false });
-    else this.setState({ start: true });
+    document.querySelector(".text").style.filter = "blur(0)";
+    this.setState({ start: true, startVisibility: "hidden" });
   };
 
   wordsPerMinute = () => {
-    this.setState({ start: false, second: 0, minute: 0 });
+    this.setState({
+      start: false,
+      second: 0,
+      minute: 0,
+      finishedVisibility: "hidden"
+    });
     let textLength = this.state.text.split(" ").length;
     let totalSeconds = this.state.second + 60 * this.state.minute;
     let speedOfReading = (textLength / totalSeconds) * 60;
@@ -77,11 +92,16 @@ class SpeedOfReading extends Component {
           startPause={this.startPause}
           setStory={this.setStory}
           goHome={this.props.goHome}
+          startVisibility={this.state.startVisibility}
         />
 
-        <div className="text" />
+        <div className="text blure" />
         <div className="endPage">
-          <button className="btn btn-dark" onClick={this.wordsPerMinute}>
+          <button
+            className="btn btn-dark"
+            onClick={this.wordsPerMinute}
+            style={{ visibility: this.state.finishedVisibility }}
+          >
             {" "}
             Finished
           </button>

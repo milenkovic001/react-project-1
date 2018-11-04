@@ -3,7 +3,7 @@ import "./App.css";
 import Text1row from "./components/readpractice/text1row";
 import WhyAndHowFastReading from "./components/whyAndHow/whyAndHowFastReading";
 import Particles from "react-particles-js";
-import SpeedOfReading from "./components/fastreading/speedOfReading";
+import SpeedOfReading from "./components/fastreadingtest/speedOfReading";
 import Navigation from "./components/nav/navigation";
 import StartingCards from "./components/startpage/startingCards";
 
@@ -121,14 +121,6 @@ class App extends Component {
     };
     if (window.innerWidth < 500) particalkOptions.particles.number.value = 30;
   }
-  // componentDidMount() {
-  //   window.addEventListener("resize", this.resize.bind(this));
-  //   this.resize();
-  // }
-
-  // resize() {
-  //   if (window.innerWidth < 500) particalkOptions.particles.number.value = 30;
-  // }
 
   goHome = () => {
     this.setState({ root: "0" });

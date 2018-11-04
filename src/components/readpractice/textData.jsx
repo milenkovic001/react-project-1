@@ -3,7 +3,7 @@ import React from "react";
 const TextData = props => {
   const { interval, length } = props;
   return (
-    <div>
+    <div className="p-1">
       <br />
       Words per minute {(60000 / interval).toFixed(2)}
       <br />

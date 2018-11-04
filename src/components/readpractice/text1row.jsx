@@ -15,7 +15,9 @@ class Text1row extends Component {
       interval: 500,
       timer: 0,
       start: false,
-      startPauseText: " Start "
+      startPauseText: " Start ",
+      disableSpeedUp: false,
+      disableSpeedDown: false
     };
   }
   componentDidMount() {
@@ -88,17 +90,29 @@ class Text1row extends Component {
     this.setState({ word: this.state.textArray[0] });
   };
 
-  speed = wordsPerMinuteValue => {
-    let wordsPerMinuteInterval = 60000 / wordsPerMinuteValue;
-    this.setState({
-      start: false,
-      startPauseText: "Start",
-      interval: wordsPerMinuteInterval
-    });
+  speedUp = () => {
+    let wordsPerMinute = 60000 / this.state.interval;
+    wordsPerMinute += 20;
+    let newInterval = 60000 / wordsPerMinute;
+    this.setState({ interval: newInterval });
     clearInterval(this.state.timer);
-    this.setTimer(wordsPerMinuteInterval);
+    this.setTimer(newInterval);
+    if (wordsPerMinute >= 890) this.setState({ disableSpeedUp: true });
+    if (this.state.disableSpeedDown && wordsPerMinute >= 30)
+      this.setState({ disableSpeedDown: false });
   };
 
+  speedDown = () => {
+    let wordsPerMinute = 60000 / this.state.interval;
+    wordsPerMinute -= 20;
+    let newInterval = 60000 / wordsPerMinute;
+    this.setState({ interval: newInterval });
+    clearInterval(this.state.timer);
+    this.setTimer(newInterval);
+    if (wordsPerMinute <= 30) this.setState({ disableSpeedDown: true });
+    if (this.state.disableSpeedUp && wordsPerMinute <= 890)
+      this.setState({ disableSpeedUp: false });
+  };
   componentWillUnmount() {
     clearInterval(this.state.timer);
   }
@@ -116,10 +130,13 @@ class Text1row extends Component {
             startPauza={this.startPauza}
             startPauseText={this.state.startPauseText}
             restartValues={this.restartValues}
-            speed={this.speed}
             newStory={this.newStory}
+            speedUp={this.speedUp}
+            speedDown={this.speedDown}
+            disableSpeedUp={this.state.disableSpeedUp}
+            disableSpeedDown={this.state.disableSpeedDown}
           />
-          <div className="markedText" />
+          <div className="markedText p-2" />
         </div>
       </div>
     );
