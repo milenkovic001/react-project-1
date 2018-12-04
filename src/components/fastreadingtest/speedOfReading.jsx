@@ -12,7 +12,8 @@ class SpeedOfReading extends Component {
       startBtnValue: "start",
       timer: "",
       text: "",
-      startVisibility: "visible"
+      startVisibility: "visible",
+      finishedVisibility: "hidden"
     };
     this.setTimer();
   }
@@ -44,7 +45,7 @@ class SpeedOfReading extends Component {
           minute: 0,
           start: false,
           startVisibility: "visible",
-          finishedVisibility: "visible"
+          finishedVisibility: "hidden"
         })
       )
       .then((document.querySelector(".text").style.filter = "blur(1.6px)"));
@@ -60,7 +61,11 @@ class SpeedOfReading extends Component {
 
   startPause = () => {
     document.querySelector(".text").style.filter = "blur(0)";
-    this.setState({ start: true, startVisibility: "hidden" });
+    this.setState({
+      start: true,
+      startVisibility: "hidden",
+      finishedVisibility: "visible"
+    }); //
   };
 
   wordsPerMinute = () => {

@@ -25,13 +25,6 @@ const EnterValue = props => {
           </button>
           <button
             className="this-btn-r btn btn-dark"
-            onClick={speedDown}
-            disabled={disableSpeedDown}
-          >
-            Speed down
-          </button>
-          <button
-            className="this-btn-r btn btn-dark"
             onClick={speedUp}
             disabled={disableSpeedUp}
           >
@@ -44,6 +37,13 @@ const EnterValue = props => {
         <div className="col">
           <button className="this-btn-l btn btn-dark" onClick={newStory}>
             Random story
+          </button>
+          <button
+            className="this-btn-r btn btn-dark"
+            onClick={speedDown}
+            disabled={disableSpeedDown}
+          >
+            Speed down
           </button>
         </div>
       </div>

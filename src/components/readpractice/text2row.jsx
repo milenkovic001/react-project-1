@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import Words from "./words";
+import Words2 from "./words2";
 import TextData from "./textData";
 import EnterValue from "./enterValue";
 import Level from "./Level";
 
-class Text1row extends Component {
+class Text2row extends Component {
   constructor(props) {
     super(props);
     this.state = {
       textArray: "",
       text: "",
-      word: "",
-      howManyWords: 1,
+      word1: "",
+      word2: "",
+      howManyWords: 2,
       textIndex: 0,
-      textArrayIndex: 0,
+      textArrayIndex: -2,
       interval: 500,
       timer: 0,
       start: false,
@@ -23,13 +24,15 @@ class Text1row extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://react-project-1-api.herokuapp.com")
+    fetch("https://react-project-1-api.herokuapp.com") //koristi ansyc
+      // fetch("http://localhost:3000") //koristi ansyc
       .then(res => res.json())
       .then(e => this.changeText(e));
   }
 
   newStory = () => {
     fetch("https://react-project-1-api.herokuapp.com/newStory")
+      // fetch("http://localhost:3000")
       .then(res => res.json())
       .then(e => this.changeText(e));
   };
@@ -42,34 +45,48 @@ class Text1row extends Component {
   };
 
   setTimer = wordsPerMinute => {
-    let textArrayLength = this.state.textArray.length;
     this.state.timer = setInterval(() => {
-      if (textArrayLength > this.state.textArrayIndex && this.state.start) {
+      if (
+        this.state.textArrayIndex < this.state.textArray.length &&
+        this.state.start
+      ) {
         this.setState({
-          word: this.state.textArray[this.state.textArrayIndex]
+          word1: this.state.textArray[this.state.textArrayIndex] || "",
+          word2: this.state.textArray[this.state.textArrayIndex + 1] || ""
         });
         this.markText();
         this.setState({
-          textIndex: this.state.word.length + this.state.textIndex + 1,
-          textArrayIndex: this.state.textArrayIndex + 1
+          textIndex:
+            this.state.word1.length +
+            this.state.word2.length +
+            this.state.textIndex +
+            2,
+          textArrayIndex: this.state.textArrayIndex + 2
         });
-      } else if (textArrayLength <= this.state.textArrayIndex) {
+      } else if (this.state.textArrayIndex >= this.state.textArray.length) {
         this.restartValues();
       }
     }, wordsPerMinute);
   };
 
   markText = () => {
-    let { textIndex, text, word } = this.state,
+    let { textIndex, text } = this.state,
       textLength = this.state.text.length,
       first,
       second,
       third,
+      localword1 = this.state.word1 || "",
+      localword2 = this.state.word2 || "",
       markedText = document.querySelector(".markedText");
 
     first = text.substring(textIndex, 0);
-    third = text.substring(textLength, textIndex + word.length + 1);
-    second = `<span style="background-color:#ADFF2F;"> ${word} </span>`;
+    third = text.substring(
+      textLength,
+      textIndex + localword1.length + localword2.length + 1
+    );
+    second = `<span style="background-color:#ADFF2F;"> ${localword1 +
+      " " +
+      localword2}  </span>`;
 
     markedText.innerHTML = first + second + third;
   };
@@ -87,7 +104,8 @@ class Text1row extends Component {
     this.state.textArrayIndex = 0;
     this.state.start = false;
     this.state.startPauseText = " Start";
-    this.state.word = this.state.textArray[0];
+    this.state.word1 = this.state.textArray[0];
+    this.state.word2 = this.state.textArray[1];
     this.markText();
     this.setState({ word: this.state.textArray[0] });
   };
@@ -123,7 +141,7 @@ class Text1row extends Component {
     return (
       <div>
         <div>
-          <Words name={this.state.word} />
+          <Words2 word1={this.state.word1} word2={this.state.word2} />
           <div className="container">
             <div className="row">
               <div className="col-9">
@@ -152,11 +170,11 @@ class Text1row extends Component {
             disableSpeedUp={this.state.disableSpeedUp}
             disableSpeedDown={this.state.disableSpeedDown}
           />
-          <div className="markedText p-2" />
+          <div className="markedText" />
         </div>
       </div>
     );
   }
 }
 
-export default Text1row;
+export default Text2row;

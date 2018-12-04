@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import Text1row from "./components/readpractice/text1row";
+import Text2row from "./components/readpractice/text2row";
+import Text4row from "./components/readpractice/text4row";
 import WhyAndHowFastReading from "./components/whyAndHow/whyAndHowFastReading";
 import Particles from "react-particles-js";
 import SpeedOfReading from "./components/fastreadingtest/speedOfReading";
@@ -10,7 +12,7 @@ import StartingCards from "./components/startpage/startingCards";
 const particalkOptions = {
   particles: {
     number: {
-      value: 125,
+      value: 50,
       density: {
         enable: true,
         value_area: 641.3648243462092
@@ -51,9 +53,9 @@ const particalkOptions = {
     },
     line_linked: {
       enable: true,
-      distance: 150,
+      distance: 200,
       color: "#666666",
-      opacity: 0.4,
+      opacity: 0.5,
       width: 1
     },
     move: {
@@ -117,7 +119,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      root: "0"
+      root: "5"
     };
     if (window.innerWidth < 500) particalkOptions.particles.number.value = 30;
   }
@@ -136,6 +138,18 @@ class App extends Component {
 
   whyFastReading = () => {
     this.setState({ root: "3" });
+  };
+
+  level1 = () => {
+    if (this.state.root !== 1) this.fastPractice();
+  };
+
+  level2 = () => {
+    if (this.state.root !== 4) this.setState({ root: "4" });
+  };
+
+  level3 = () => {
+    if (this.state.root !== 5) this.setState({ root: "5" });
   };
 
   render() {
@@ -160,7 +174,11 @@ class App extends Component {
                 <div>
                   <Navigation goHome={this.goHome} />
                   <div className="centar-max-w">
-                    <Text1row />
+                    <Text1row
+                      level1={this.level1}
+                      level2={this.level2}
+                      level3={this.level3}
+                    />
                   </div>
                 </div>
               );
@@ -175,6 +193,32 @@ class App extends Component {
                 <div>
                   <Navigation goHome={this.goHome} />
                   <WhyAndHowFastReading />
+                </div>
+              );
+            case "4":
+              return (
+                <div>
+                  <Navigation goHome={this.goHome} />
+                  <div className="centar-max-w">
+                    <Text2row
+                      level1={this.level1}
+                      level2={this.level2}
+                      level3={this.level3}
+                    />
+                  </div>
+                </div>
+              );
+            case "5":
+              return (
+                <div>
+                  <Navigation goHome={this.goHome} />
+                  <div className="centar-max-w">
+                    <Text4row
+                      level1={this.level1}
+                      level2={this.level2}
+                      level3={this.level3}
+                    />
+                  </div>
                 </div>
               );
             default:
